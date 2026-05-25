@@ -8,4 +8,4 @@ def hello():
 
 if __name__ == '__main__':
     # On ajoute le commentaire d'arrêt tout au bout de la ligne 13
-    app.run(host='0.0.0.0', port=5000)  # nosemgrep
+    app.run(host='0.0.0.0', port=5000)  # nosemgr
