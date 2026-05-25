@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Mon application securisee pour ma soutenance !"
+    return "Mon application securisee !"
 
 if __name__ == '__main__':
     # On ajoute le commentaire d'arrêt tout au bout de la ligne 13
