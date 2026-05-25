@@ -1,0 +1,27 @@
+name: Scan de Securite DevSecOps
+
+# On dit à GitHub de lancer le scan à chaque fois qu'on fait un "git push"
+on: [push]
+
+jobs:
+  verification-securite:
+    runs-on: ubuntu-latest # GitHub prête une machine Linux gratuitement pour le scan
+    steps:
+      # Étape A : Copier le code sur la machine de GitHub
+      - name: Recuperation du code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Étape B : Scan Gitleaks (Recherche de mots de passe / clés API cachées)
+      - name: Scan Gitleaks (Secrets)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Étape C : Scan Trivy (Recherche de failles dans le code et les dépendances)
+      - name: Scan Trivy (Code & Dependances)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs' # 'fs' signifie qu'on scanne les fichiers du projet
+          format: 'table'
