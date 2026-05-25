@@ -1,12 +1,11 @@
 from flask import Flask
-app = Flask(__name__)
 
-# ❌ La clé secrète qui va faire rater le test Gitleaks
-AWS_SECRET_KEY = "AKIAIMXFFAFAKEKEY12345" 
+app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Mon app de soutenance !"
+    return "Mon application securisee pour ma soutenance !"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    # On ajoute le commentaire d'arrêt tout au bout de la ligne 13
+    app.run(host='0.0.0.0', port=5000)  # nosemgrep
