@@ -11,13 +11,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      # On force Gitleaks à scanner TOUT le dossier, pas juste le dernier commit
       - name: Scan Gitleaks (Secrets)
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # On ajoute 'exit-code: 1' pour forcer Trivy à renvoyer une ERREUR (croix rouge) s'il trouve une faille
       - name: Scan Trivy (Code & Dependances)
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           format: 'table'
+          exit-code: '1' # 1 signifie "Erreur/Blocage"
+          severity: 'CRITICAL,HIGH' # On ne bloque que pour les failles graves
