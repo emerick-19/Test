@@ -7,7 +7,7 @@ AWS_SECRET_KEY = "AKIAIMXFFAFAKEKEY12345"
 
 @app.route('/')
 def hello():
-    return "Mon application pour ma soutenance !"
+    return "Test de ma soutenance version 2"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
